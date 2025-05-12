@@ -11,7 +11,7 @@ body {
     }
 
     @font-face {
-        font-family: 'P5R'; /* Name your font */
+        font-family: 'P5R';
         src: url('fonts/Persona5MenuFontPrototype-Regular.ttf') format('ttf'),
              url('fonts/Persona5MenuFontPrototype-Regular.ttf') format('ttf'); 
     }
@@ -24,6 +24,7 @@ body {
       border-radius: 12px;
       box-shadow: 10px 10px 0 #ff2b2b;
       transform: skewX(-4deg);
+      font-family: 'P5R';
       /* transform: skewX(-4deg); */
     }
 
