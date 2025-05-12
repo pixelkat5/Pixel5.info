@@ -23,7 +23,7 @@ const choices = document.querySelectorAll('.choice');
         updateSelection();
       } else if (e.key === 'Enter') {
         const selectedChoice = choices[selectedIndex].dataset.choice;
-        alert(`You chose: ${selectedChoice}`);
+        alert(`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`);
       }
     });
 
