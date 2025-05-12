@@ -14,6 +14,9 @@
     font-family: 'P5R';
     src: url('./fonts/Persona5MenuFontPrototype-Regular.otf') format('opentype');
 }
+    .P5R {
+    font-family: 'P5R', sans-serif;
+    }
 
 
     @font-face {
