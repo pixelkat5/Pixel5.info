@@ -26,6 +26,7 @@
       transform: skewX(-4deg);
       font-family: 'Persona 5 Menu Font Prototype';
       font-weight: normal;
+      font-style: normal;
     }
 
     .dialog-question {
