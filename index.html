@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Test</title>
+  <title>test</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="dialog-box">
-    <p class="dialog-question">Lorum</p>
+    <p class="dialog-question">lorum</p>
     <div class="choice-container">
-      <div class="choice selected">
+      <div class="choice selected" data-choice="Yes">
         <span class="arrow">▶</span> Yes
       </div>
-      <div class="choice">No</div>
+      <div class="choice" data-choice="No">
+        <span class="arrow hidden">▶</span> No
+      </div>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
