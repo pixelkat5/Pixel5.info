@@ -24,7 +24,6 @@ body {
       border-radius: 12px;
       box-shadow: 10px 10px 0 #ff2b2b;
       transform: skewX(-4deg);
-      font-family: 'P5R';
       /* transform: skewX(-4deg); */
     }
 
@@ -32,6 +31,9 @@ body {
       font-size: 1.8rem;
       margin-bottom: 20px;
       transform: skewX(4deg);
+      align-items: center;
+      justify-content: center;
+      font-family: 'P5R';
     }
 
     .choice-container {
