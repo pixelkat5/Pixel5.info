@@ -1,4 +1,4 @@
-body {
+    body {
       margin: 0;
       padding: 0;
       background-color: #121212;
@@ -14,26 +14,23 @@ body {
         font-family: 'P5R';
         src: url('fonts/Persona5MenuFontPrototype-Regular.ttf') format('ttf'),
              url('fonts/Persona5MenuFontPrototype-Regular.ttf') format('ttf'); 
-    }
-
+    }    
+    
     .dialog-box {
       background: #000;
       border: 4px solid #fff;
       padding: 25px 30px;
       width: 400px;
-      border-radius: 12px;
+      border-radius: 2px;
       box-shadow: 10px 10px 0 #ff2b2b;
       transform: skewX(-4deg);
-      /* transform: skewX(-4deg); */
+      font-family: 'P5R';
     }
 
     .dialog-question {
       font-size: 1.8rem;
       margin-bottom: 20px;
       transform: skewX(4deg);
-      align-items: center;
-      justify-content: center;
-      font-family: 'P5R';
     }
 
     .choice-container {
@@ -57,7 +54,7 @@ body {
     .choice.selected {
       background: #ff2b2b;
       color: #fff;
-      rotate: 50deg;
+      border-radius: 5px;
     }
 
     .arrow {
