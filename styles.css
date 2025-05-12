@@ -10,24 +10,6 @@
       color: white;
     }
 
-    @font-face {
-    font-family: 'P5R';
-    src: url('./fonts/Persona5MenuFontPrototype-Regular.otf') format('opentype');
-}
-    .P5R {
-    font-family: 'P5R', sans-serif;
-    }
-
-
-    @font-face {
-        font-family: "P5";
-        src: url(https://github.com/pixelkat5/Pixel5.info/blob/main/fonts/Persona5MenuFontPrototype-Rg.woff) format("truetype");
-    }
-
-    p.customfont { 
-        font-family: "P5R", Verdana, Tahoma;
-    }
-    
     .dialog-box {
       background: #000;
       border: 4px solid #fff;
@@ -36,9 +18,6 @@
       border-radius: 2px;
       box-shadow: 10px 10px 0 #ff2b2b;
       transform: skewX(-4deg);
-      font-family: 'Persona 5 Menu Font Prototype';
-      font-weight: normal;
-      font-style: normal;
     }
 
     .dialog-question {
