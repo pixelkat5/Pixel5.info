@@ -20,6 +20,10 @@
         font-family: "P5";
         src: url(https://github.com/pixelkat5/Pixel5.info/blob/main/fonts/Persona5MenuFontPrototype-Rg.woff) format("truetype");
     }
+
+    p.customfont { 
+        font-family: "P5R", Verdana, Tahoma;
+    }
     
     .dialog-box {
       background: #000;
