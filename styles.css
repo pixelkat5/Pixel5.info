@@ -1,55 +1,59 @@
-/* Basic Reset */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  font-family: 'Arial Black', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.dialog {
-  background-color: rgba(0, 0, 0, 0.75); /* Dark, semi-transparent background */
-  border-radius: 15px;
-  padding: 30px;
-  text-align: center;
-  width: 300px;
+.dialog-box {
+  background: #000;
+  border: 4px solid #fff;
+  padding: 20px 30px;
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 0 #ff0000;
+  color: #fff;
+  transform: skewX(-5deg);
 }
 
-.question {
-  font-size: 1.5rem;
+.dialog-question {
+  font-size: 1.8rem;
   margin-bottom: 20px;
-  color: #fff;
+  transform: skewX(5deg);
 }
 
-.options {
+.choice-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  transform: skewX(5deg);
 }
 
-.option {
-  background-color: #1e1e1e;
-  border: 2px solid #ff5a5f; /* A Persona-inspired red accent */
-  color: #fff;
+.choice {
+  background: #1e1e1e;
   padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
+  border: 2px solid #fff;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
+  position: relative;
+  font-size: 1.2rem;
+  width: 45%;
+  text-align: left;
+  transition: all 0.2s;
 }
 
-.option:hover {
-  background-color: #ff5a5f;
-  border-color: #ff5a5f;
+.choice.selected,
+.choice:hover {
+  background-color: #ff2b2b;
+  border-color: #fff;
+  color: #fff;
 }
 
-.option:active {
-  background-color: #ff1d26; /* Darker red when clicked */
+.arrow {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
