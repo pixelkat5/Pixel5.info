@@ -1,4 +1,4 @@
-const choices = document.querySelectorAll('.choice');
+   const choices = document.querySelectorAll('.choice');
     let selectedIndex = 0;
 
     function updateSelection() {
@@ -23,7 +23,7 @@ const choices = document.querySelectorAll('.choice');
         updateSelection();
       } else if (e.key === 'Enter') {
         const selectedChoice = choices[selectedIndex].dataset.choice;
-        alert(`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`);
+        alert(`You chose: ${selectedChoice}`);
       }
     });
 
