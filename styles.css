@@ -24,7 +24,8 @@
       border-radius: 2px;
       box-shadow: 10px 10px 0 #ff2b2b;
       transform: skewX(-4deg);
-      font-family: 'P5R';
+      font-family: 'Persona 5 Menu Font Prototype';
+      font-weight: normal;
     }
 
     .dialog-question {
