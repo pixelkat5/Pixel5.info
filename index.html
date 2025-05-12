@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Testing</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="dialog-box">
-    <p class="dialog-question">lorum</p>
-    <div class="choice-container">
-      <div class="choice selected" data-choice="Yes">
-        <span class="arrow">▶</span> Yes
-      </div>
-      <div class="choice" data-choice="No">
-        <span class="arrow hidden">▶</span> No
-      </div>
-    </div>
-  </div>
+const choices = document.querySelectorAll('.choice');
+let selectedIndex = 0;
 
-  <script src="script.js"></script>
-</body>
-</html>
+function updateSelection() {
+  choices.forEach((choice, index) => {
+    const arrow = choice.querySelector('.arrow');
+    if (index === selectedIndex) {
+      choice.classList.add('selected');
+      arrow.classList.remove('hidden');
+    } else {
+      choice.classList.remove('selected');
+      arrow.classList.add('hidden');
+    }
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') {
+    selectedIndex = (selectedIndex - 1 + choices.length) % choices.length;
+    updateSelection();
+  } else if (e.key === 'ArrowRight') {
+    selectedIndex = (selectedIndex + 1) % choices.length;
+    updateSelection();
+  } else if (e.key === 'Enter') {
+    const selectedChoice = choices[selectedIndex].dataset.choice;
+    alert(`You chose: ${selectedChoice}`);
+    // Add your logic for what happens on confirmation
+  }
+});
+
+updateSelection(); // Initial display
