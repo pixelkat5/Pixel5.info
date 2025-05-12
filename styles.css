@@ -1,0 +1,55 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #181818;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dialog {
+  background-color: rgba(0, 0, 0, 0.75); /* Dark, semi-transparent background */
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  width: 300px;
+}
+
+.question {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.option {
+  background-color: #1e1e1e;
+  border: 2px solid #ff5a5f; /* A Persona-inspired red accent */
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.option:hover {
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
+}
+
+.option:active {
+  background-color: #ff1d26; /* Darker red when clicked */
+}
