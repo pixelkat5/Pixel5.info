@@ -11,6 +11,14 @@
     }
 
     @font-face {
+        font-family: 'lust display regular';
+        src: url('fonts/lust-display-regular.otf') format('otf'),
+             url('fonts/lust-display-regular.otf') format('otf');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
         font-family: 'helvetica_now_text_black';
         src: url('/fonts/helveticanowtext-black-demo-webfont.woff2') format('woff2'),
              url('/fonts/helveticanowtext-black-demo-webfont.woff') format('woff');
@@ -39,7 +47,7 @@
       margin-bottom: 20px;
       transform: skewX(4deg);
       text-align: center;
-      font-family: 'helvetica_now_text_black';
+      font-family: 'lust display regular';
     }
 
     .choice-container {
