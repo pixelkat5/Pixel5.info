@@ -12,8 +12,8 @@
 
     @font-face {
         font-family: 'helvetica_now_text_black';
-        src: url('helveticanowtext-black-demo-webfont.woff2') format('woff2'),
-             url('helveticanowtext-black-demo-webfont.woff') format('woff');
+        src: url('/fonts/helveticanowtext-black-demo-webfont.woff2') format('woff2'),
+             url('/fonts/helveticanowtext-black-demo-webfont.woff') format('woff');
         font-weight: normal;
         font-style: normal;
     }
