@@ -30,6 +30,7 @@
       font-size: 1.8rem;
       margin-bottom: 20px;
       transform: skewX(4deg);
+      text-align: center;
     }
 
     .choice-container {
