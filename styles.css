@@ -78,3 +78,33 @@
     .hidden {
       visibility: hidden;
     }
+
+{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #1b1b2f;
+      font-family: sans-serif;
+    }
+
+    .p5cc-button {
+      padding: 12px 24px;
+      background-color: #e94560;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .p5cc-button:hover {
+      background-color: #d83450;
+      transform: translateY(-2px);
+    }
+
+    .p5cc-button:active {
+      transform: translateY(0);
+    }
