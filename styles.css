@@ -45,6 +45,7 @@
     .dialog-question {
       font-size: 1.8rem;
       margin-bottom: 20px;
+      margin-top: 20px;
       transform: skewX(4deg);
       text-align: unset;
       font-family: 'lust display regular';
