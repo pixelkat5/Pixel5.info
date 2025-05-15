@@ -48,6 +48,7 @@
       transform: skewX(4deg);
       text-align: center;
       font-family: 'lust display regular';
+      font-size: 45px;
     }
 
     .choice-container {
