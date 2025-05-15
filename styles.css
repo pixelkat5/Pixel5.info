@@ -43,12 +43,13 @@
     }
 
     .dialog-question {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      margin-top: 20px;
-      transform: skewX(4deg);
-      text-align: unset;
-      font-family: 'lust display regular';
+	  font-size: 1.8rem;
+	  margin-bottom: 1px;
+	  transform: skewX(4deg);
+	  text-align: unset;
+	  /* font-family: 'lust display regular'; */
+	  font-size: 2.5rem;
+	  margin-top: 1rem;   
     }
 
     .choice-container {
