@@ -46,7 +46,7 @@
       font-size: 1.8rem;
       margin-bottom: 20px;
       transform: skewX(4deg);
-      text-align: center;
+      text-align: unset;
       font-family: 'lust display regular';
       font-size: 45px;
     }
