@@ -82,15 +82,27 @@
       text-align: center;
     }
 
-    .arrow {
-      position: absolute;
-      left: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.2rem;
-      color: white;
-    }
+.arrow {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: white;
+  visibility: hidden;
+}
 
     .hidden {
       visibility: hidden;
     }
+
+.choice.selected .arrow {
+  visibility: visible;
+  animation: arrowselector 1s infinite alternate;
+}
+
+@keyframes arrowselector {
+  0% { left: -20px; }
+  15% { left: -10px; }
+  50% { left: -20px; }
+}
