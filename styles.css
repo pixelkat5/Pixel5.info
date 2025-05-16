@@ -8,7 +8,10 @@
       align-items: center;
       height: 100vh;
       color: white;
-      cursor: url('cursor.cur'), auto;
+      cursor: url('cursors/cursor.cur'), auto;
+      cursor: url('cursors/cursor.cur'), pointer;
+      cursor: url('cursors/Text.CUR'), text;
+      cursor: url('cursors/Help.cur'), help;
     }
 
     @font-face {
