@@ -83,7 +83,12 @@
     }
 
     .arrow {
-
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: white;
     }
 
     .hidden {
