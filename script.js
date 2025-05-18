@@ -24,9 +24,9 @@ const choices = document.querySelectorAll('.choice');
         selectedIndex = (selectedIndex + 1) % choices.length;
         updateSelection();
       } else if (e.key === 'Enter') {
+        click.play();
         const selectedChoice = choices[selectedIndex].dataset.choice;
         alert(`You chose: ${selectedChoice}`);
-           click.play();
       }
     });
 
