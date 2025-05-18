@@ -1,4 +1,6 @@
-   const choices = document.querySelectorAll('.choice');
+var click = new Audio('https://pixel5.info/sound/P5R-Select.mp3');
+
+const choices = document.querySelectorAll('.choice');
     let selectedIndex = 0;
 
     function updateSelection() {
@@ -24,6 +26,7 @@
       } else if (e.key === 'Enter') {
         const selectedChoice = choices[selectedIndex].dataset.choice;
         alert(`You chose: ${selectedChoice}`);
+           click.play();
       }
     });
 
