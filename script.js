@@ -27,6 +27,7 @@ const choices = document.querySelectorAll('.choice');
         click.play();
         const selectedChoice = choices[selectedIndex].dataset.choice;
         alert(`You chose: ${selectedChoice}`);
+        click.play();
       }
     });
 
