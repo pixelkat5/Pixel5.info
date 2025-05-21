@@ -1,4 +1,7 @@
 var click = new Audio('https://pixel5.info/sound/P5R-Select.mp3');
+// var click = new Audio('');
+// var click = new Audio('');
+
 
 const choices = document.querySelectorAll('.choice');
     let selectedIndex = 0;
@@ -32,8 +35,6 @@ const choices = document.querySelectorAll('.choice');
     });
 
     updateSelection(); // Initial display
-
-
 
 
 
