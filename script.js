@@ -21,13 +21,13 @@ const choices = document.querySelectorAll('.choice');
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') {
-        flip.play();
         selectedIndex = (selectedIndex - 1 + choices.length) % choices.length;
         updateSelection();
-      } else if (e.key === 'ArrowRight') {
         flip.play();
+      } else if (e.key === 'ArrowRight') {
         selectedIndex = (selectedIndex + 1) % choices.length;
         updateSelection();
+        flip.play();
       } else if (e.key === 'Enter') {
         click.play();
         const selectedChoice = choices[selectedIndex].dataset.choice;
