@@ -1,6 +1,6 @@
 var click = new Audio('https://pixel5.info/sound/P5R-Select.mp3');
-// var invalid = new Audio('https://pixel5.info/sound/00004.mp3');
-// var click = new Audio('');
+var invalid = new Audio('https://pixel5.info/sound/00004.mp3');
+var flip = new Audio('https://pixel5.info/sound/00002_streaming.mp3');
 
 
 const choices = document.querySelectorAll('.choice');
@@ -21,9 +21,11 @@ const choices = document.querySelectorAll('.choice');
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') {
+        flip.play();
         selectedIndex = (selectedIndex - 1 + choices.length) % choices.length;
         updateSelection();
       } else if (e.key === 'ArrowRight') {
+        flip.play();
         selectedIndex = (selectedIndex + 1) % choices.length;
         updateSelection();
       } else if (e.key === 'Enter') {
