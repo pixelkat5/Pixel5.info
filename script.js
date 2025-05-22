@@ -33,11 +33,7 @@ const choices = document.querySelectorAll('.choice');
         const selectedChoice = choices[selectedIndex].dataset.choice;
         alert(`You chose: ${selectedChoice}`);
         click.play();
-      }  else if (e.key === 'spacebar') {
-        invalid.play();
-      }  else if (e.key === 'space') {
-        invalid.play();
-      }
+      } 
     });
 
     updateSelection(); // Initial display
