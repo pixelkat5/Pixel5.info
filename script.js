@@ -23,11 +23,11 @@ const choices = document.querySelectorAll('.choice');
       if (e.key === 'ArrowLeft') {
         selectedIndex = (selectedIndex - 1 + choices.length) % choices.length;
         updateSelection();
-        flip.play();
+//        flip.play();
       } else if (e.key === 'ArrowRight') {
         selectedIndex = (selectedIndex + 1) % choices.length;
         updateSelection();
-        flip.play();
+//        flip.play();
       } else if (e.key === 'Enter') {
         click.play();
         const selectedChoice = choices[selectedIndex].dataset.choice;
