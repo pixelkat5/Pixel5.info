@@ -1,7 +1,4 @@
 var click = new Audio('https://pixel5.info/sound/P5R-Select.mp3');
-var invalid = new Audio('https://pixel5.info/sound/00004.mp3');
-var flip = new Audio('https://pixel5.info/sound/00002_streaming.mp3');
-
 
 const choices = document.querySelectorAll('.choice');
     let selectedIndex = 0;
@@ -23,20 +20,20 @@ const choices = document.querySelectorAll('.choice');
       if (e.key === 'ArrowLeft') {
         selectedIndex = (selectedIndex - 1 + choices.length) % choices.length;
         updateSelection();
-//        flip.play();
       } else if (e.key === 'ArrowRight') {
         selectedIndex = (selectedIndex + 1) % choices.length;
         updateSelection();
-//        flip.play();
       } else if (e.key === 'Enter') {
         click.play();
         const selectedChoice = choices[selectedIndex].dataset.choice;
         alert(`You chose: ${selectedChoice}`);
         click.play();
-      } 
+      }
     });
 
     updateSelection(); // Initial display
+
+
 
 
 
