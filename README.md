@@ -14,8 +14,6 @@
               |__/      |__/|__/  \__/ \_______/|__/|_______/       |_______/ |__/   \___/   \_______/              
 ```
 
-Happy pride month people!
-
 # -- TO DO --
 - [ ] Custom Cursors
 - [ ] Main page
