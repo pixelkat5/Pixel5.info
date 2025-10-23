@@ -77,6 +77,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    navLinks.forEach((link, index) => {
+        link.addEventListener('mouseenter', () => {
+            navLinks.forEach(l => l.classList.remove('nav-selected'));
+        });
+        
+        link.addEventListener('mouseleave', () => {
+            updateNavSelection();
+        });
+    });
+    
     document.addEventListener('keydown', (e) => {
         const overlay = document.querySelector('.overlay');
         if (overlay && overlay.style.display !== 'none') {
