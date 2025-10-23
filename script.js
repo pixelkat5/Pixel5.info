@@ -71,11 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.forEach((link, index) => {
             if (index === navSelectedIndex) {
                 link.classList.add('nav-selected');
-                link.style.outline = '2px solid #00FFFF';
-                link.style.outlineOffset = '2px';
             } else {
                 link.classList.remove('nav-selected');
-                link.style.outline = 'none';
             }
         });
     }

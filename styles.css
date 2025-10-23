@@ -252,34 +252,41 @@ h1.lustfont {
   right: 0;
 }
 
-.link-wrapper:hover {
+.link-wrapper:hover,
+.link-wrapper.nav-selected {
   z-index: 9999;
 }
 
-.link-wrapper:hover .shape-wrapper { 
+.link-wrapper:hover .shape-wrapper,
+.link-wrapper.nav-selected .shape-wrapper { 
   transform: rotate(-6deg);
   display: block; 
 }
 
-.link-wrapper:hover .shape-wrapper .shape.cyan-fill {
+.link-wrapper:hover .shape-wrapper .shape.cyan-fill,
+.link-wrapper.nav-selected .shape-wrapper .shape.cyan-fill {
   transform: scale(3,.1);
 }
 
-.link-wrapper:hover .img-wrapper img {
+.link-wrapper:hover .img-wrapper img,
+.link-wrapper.nav-selected .img-wrapper img {
   animation: tiltBounce .15s ease;
   animation-fill-mode: forwards;
   display: block;
 }
 
-.link-wrapper:hover .img-wrapper img.normal {
+.link-wrapper:hover .img-wrapper img.normal,
+.link-wrapper.nav-selected .img-wrapper img.normal {
   mix-blend-mode: darken;
 }
 
-.link-wrapper:nth-child(even):hover .shape-wrapper { 
+.link-wrapper:nth-child(even):hover .shape-wrapper,
+.link-wrapper:nth-child(even).nav-selected .shape-wrapper { 
   transform: rotate(11deg);
 }
 
-.link-wrapper:nth-child(even):hover .img-wrapper img {
+.link-wrapper:nth-child(even):hover .img-wrapper img,
+.link-wrapper:nth-child(even).nav-selected .img-wrapper img {
   animation: tiltBounceAlt .15s ease;
   animation-fill-mode: forwards;
 }
