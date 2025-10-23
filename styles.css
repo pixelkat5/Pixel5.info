@@ -154,75 +154,236 @@ h1.lustfont {
 
 
 .big-container {
-	width: 1075px;
-	height: auto;
-	border: 1px solid black;
-	margin: auto;
-	padding: 20px;
-	background-color: #f00;
+        width: 1075px;
+        height: auto;
+        border: 1px solid black;
+        margin: auto;
+        padding: 20px;
+        background-color: #f00;
 }
 
 .header {
-	width: auto;
-	height: 140px;
-	border: 3px solid #000;
-	margin-bottom: 10px;
-	background-color: white;
-	box-shadow: 4px 4px #000;
+        width: auto;
+        height: 140px;
+        border: 3px solid #000;
+        margin-bottom: 10px;
+        background-color: white;
+        box-shadow: 4px 4px #000;
 }
 
 .top {
-	width: auto;
-	height: auto;
-	border: none;
+        width: auto;
+        height: auto;
+        border: none;
 }
 
 .welcome-sign {
-	width: 800px;
-	height: 355px;
-	border: 3px solid #000;
-	margin-bottom: 5px;
-	padding: 10px;
-	background-color: #F00;
-	box-shadow: 4px 4px #000;
-	border-radius: 0;
+        width: 800px;
+        height: 355px;
+        border: 3px solid #000;
+        margin-bottom: 5px;
+        padding: 10px;
+        background-color: #F00;
+        box-shadow: 4px 4px #000;
+        border-radius: 0;
 }
 
 .welcome2 {
-	width: auto;
-	height: auto;
-	padding: 15px;
-	background-color: #F00;
-	
+        width: auto;
+        height: auto;
+        padding: 15px;
+        background-color: #F00;
+        
 }
 
 .update-corner {
-	width: 800px;
-	height: auto;
-	border: 3px solid #000;
-	margin-top: 5px;
-	padding: 15px;
-	box-shadow: 4px 4px #000;
-	background-color: white;
+        width: 800px;
+        height: auto;
+        border: 3px solid #000;
+        margin-top: 5px;
+        padding: 15px;
+        box-shadow: 4px 4px #000;
+        background-color: white;
 }
 
 .nav {
-	width: 200px;
-	height: 610px;
-	border: 3px solid #000;
-	background-color: #FFF;
-	margin-right: 3px;
-	box-shadow: 4px 4px #000;
+        width: 200px;
+        height: 610px;
+        border: 3px solid #000;
+        background-color: #FFF;
+        margin-right: 3px;
+        box-shadow: 4px 4px #000;
+        overflow: hidden;
+}
+
+.navbar {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.link-wrapper {
+  position: relative;
+  display: block;
+  margin: 16px 0;
+}
+
+.link-wrapper .fallback {
+  font-size: 1.25em;
+  letter-spacing: 2px;
+  line-height: 0;
+  opacity: 0;
+  position: relative;
+  top: 15px;
+  left: 0;
+}
+
+.link-wrapper .shape-wrapper { 
+  display: none; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.link-wrapper:hover {
+  z-index: 9999;
+}
+
+.link-wrapper:hover .shape-wrapper { 
+  transform: rotate(-6deg);
+  display: block; 
+}
+
+.link-wrapper:hover .shape-wrapper .shape.cyan-fill {
+  transform: scale(3,.1);
+}
+
+.link-wrapper:hover .img-wrapper img {
+  animation: tiltBounce .15s ease;
+  animation-fill-mode: forwards;
+  display: block;
+}
+
+.link-wrapper:hover .img-wrapper img.normal {
+  mix-blend-mode: darken;
+}
+
+.link-wrapper:nth-child(even):hover .shape-wrapper { 
+  transform: rotate(11deg);
+}
+
+.link-wrapper:nth-child(even):hover .img-wrapper img {
+  animation: tiltBounceAlt .15s ease;
+  animation-fill-mode: forwards;
+}
+
+.img-wrapper img {
+  width: auto;
+  height: 40px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: -5px;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 999;
+}
+
+.img-wrapper img.normal {
+  display: block;
+}
+
+.img-wrapper img.active {
+  display: none;
+  z-index: -1;
+}
+
+.shape-wrapper {
+  filter: sepia(50%) saturate(3);
+}
+
+.shape-wrapper .shape {
+  transition: all .1s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  overflow: hidden;
+}
+
+.shape-wrapper .shape svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.shape-wrapper .shape.cyan-fill {
+  mix-blend-mode: screen;
+  animation-delay: 0.05s;
+  animation-duration: .4s;
+}
+
+.shape-wrapper .shape.red-fill {
+  animation-duration: .45s;
+  animation-delay: 0.08s;
+  opacity: .8;
+}
+
+.jelly {
+  animation-name: jelly;
+  transform-origin: center;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes tiltBounce {
+  0% {
+    transform: scale(1) rotate(-7deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(-7deg);
+  }
+  100% {
+    transform: scale(1.15) rotate(-7deg);
+  }
+}
+
+@keyframes tiltBounceAlt {
+  0% {
+    transform: scale(1) rotate(7deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(7deg);
+  }
+  100% {
+    transform: scale(1.15) rotate(7deg);
+  }
+}
+
+@keyframes jelly {
+  0% {
+    width: 100%; 
+    transform: scale(1.25,1) skewX(20deg) translateY(3px) rotateX(40deg) rotateY(10deg) rotateZ(-10deg);
+  }
+  50% { 
+    width: 100%; 
+    transform: scale(1.25,1.1) skewX(-15deg) translateY(-2px) translateZ(-30px);
+  }
+  100% { 
+    width: 100%; 
+    transform: scale(1.25,1) skewX(20deg) translateY(3px) rotateX(-40deg) rotateY(-10deg) rotateZ(-15deg);
+  }
 }
 
 .main-nav {
-	width: auto;
-	height: auto;
-	margin-right: 10px;
+        width: auto;
+        height: auto;
+        margin-right: 10px;
 }
 
 .flex {
-	display: flex;
+        display: flex;
 }
 
 .big-container, .welcome-sign, .update-corner, .nav {
@@ -230,15 +391,15 @@ h1.lustfont {
 }
 
 .flex-2 {
-	display: flex;
-	flex-direction: column;
+        display: flex;
+        flex-direction: column;
 }
 
 #counter {
     padding: .5em;
     background-color: #fff;
     border: 3px solid #000;
-	width: auto;
-  	box-shadow: 4px 4px #000;
+        width: auto;
+        box-shadow: 4px 4px #000;
 }
 
