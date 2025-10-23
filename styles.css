@@ -218,13 +218,20 @@ h1.lustfont {
 
 .navbar {
   text-align: center;
-  margin-top: 18px;
+  margin-top: 10px;
+  padding: 5px;
 }
 
 .link-wrapper {
   position: relative;
   display: block;
-  margin: 16px 0;
+  margin: 8px auto;
+  text-decoration: none;
+  transition: transform 0.1s ease;
+}
+
+.link-wrapper.nav-selected {
+  transform: scale(1.05);
 }
 
 .link-wrapper .fallback {

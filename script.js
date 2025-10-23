@@ -63,4 +63,49 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.addEventListener('click', enableAudio, { once: true });
     updateSelection();
+    
+    const navLinks = document.querySelectorAll('.link-wrapper');
+    let navSelectedIndex = 0;
+    
+    function updateNavSelection() {
+        navLinks.forEach((link, index) => {
+            if (index === navSelectedIndex) {
+                link.classList.add('nav-selected');
+                link.style.outline = '2px solid #00FFFF';
+                link.style.outlineOffset = '2px';
+            } else {
+                link.classList.remove('nav-selected');
+                link.style.outline = 'none';
+            }
+        });
+    }
+    
+    document.addEventListener('keydown', (e) => {
+        const overlay = document.querySelector('.overlay');
+        if (overlay && overlay.style.display !== 'none') {
+            return;
+        }
+        
+        enableAudio();
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            flip.currentTime = 0;
+            flip.play();
+            navSelectedIndex = (navSelectedIndex - 1 + navLinks.length) % navLinks.length;
+            updateNavSelection();
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            flip.currentTime = 0;
+            flip.play();
+            navSelectedIndex = (navSelectedIndex + 1) % navLinks.length;
+            updateNavSelection();
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            click.currentTime = 0;
+            click.play();
+            navLinks[navSelectedIndex].click();
+        }
+    });
+    
+    updateNavSelection();
 });
