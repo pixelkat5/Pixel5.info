@@ -219,7 +219,7 @@ h1.lustfont {
 .navbar {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 35px;
   text-align: center;
   margin-top: 10px;
   padding: 5px;
