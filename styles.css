@@ -217,6 +217,9 @@ h1.lustfont {
 }
 
 .navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   text-align: center;
   margin-top: 10px;
   padding: 5px;
@@ -225,7 +228,6 @@ h1.lustfont {
 .link-wrapper {
   position: relative;
   display: block;
-  margin: 8px auto;
   text-decoration: none;
   transition: transform 0.1s ease;
 }
