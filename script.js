@@ -1,5 +1,5 @@
-var click = new Audio('https://pixel5.info/sound/P5R-Select.mp3');
-var flip = new Audio('https://pixel5.info/sound/00002_streaming.mp3');
+var click = null;
+var flip = null;
 
 function collapseui() {
     document.querySelector(".overlay").style.display = "none";
@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function enableAudio() {
         if (!audioReady) {
+            click = new Audio('https://pixel5.info/sound/P5R-Select.mp3');
+            flip = new Audio('https://pixel5.info/sound/00002_streaming.mp3');
             click.play().then(() => click.pause()).catch(() => {});
             flip.play().then(() => flip.pause()).catch(() => {});
             audioReady = true;
@@ -39,18 +41,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         enableAudio();
         if (e.key === 'ArrowLeft') {
-            flip.currentTime = 0;
-            flip.play();
+            if (flip) {
+                flip.currentTime = 0;
+                flip.play();
+            }
             selectedIndex = (selectedIndex - 1 + choices.length) % choices.length;
             updateSelection();
         } else if (e.key === 'ArrowRight') {
-            flip.currentTime = 0;
-            flip.play();
+            if (flip) {
+                flip.currentTime = 0;
+                flip.play();
+            }
             selectedIndex = (selectedIndex + 1) % choices.length;
             updateSelection();
         } else if (e.key === 'Enter') {
-            click.currentTime = 0;
-            click.play();
+            if (click) {
+                click.currentTime = 0;
+                click.play();
+            }
             const selectedChoice = choices[selectedIndex].dataset.choice;
             
             if (selectedChoice === 'Yes') {
@@ -96,20 +104,26 @@ document.addEventListener('DOMContentLoaded', function() {
         enableAudio();
         if (e.key === 'ArrowUp') {
             e.preventDefault();
-            flip.currentTime = 0;
-            flip.play();
+            if (flip) {
+                flip.currentTime = 0;
+                flip.play();
+            }
             navSelectedIndex = (navSelectedIndex - 1 + navLinks.length) % navLinks.length;
             updateNavSelection();
         } else if (e.key === 'ArrowDown') {
             e.preventDefault();
-            flip.currentTime = 0;
-            flip.play();
+            if (flip) {
+                flip.currentTime = 0;
+                flip.play();
+            }
             navSelectedIndex = (navSelectedIndex + 1) % navLinks.length;
             updateNavSelection();
         } else if (e.key === 'Enter') {
             e.preventDefault();
-            click.currentTime = 0;
-            click.play();
+            if (click) {
+                click.currentTime = 0;
+                click.play();
+            }
             navLinks[navSelectedIndex].click();
         }
     });
