@@ -436,10 +436,8 @@ h1.lustfont {
 
 
 .bannerimg {
-  width: 200px;
-  height: 150px;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-position: -50px -30px;
-
+  text-align: center;
+  align-content: center;
+  width: 25rem;
+  object-fit: contain
 }
