@@ -416,11 +416,6 @@ h1.lustfont {
   display: flex;
 }
 
-.big-container,
-.welcome-sign,
-.update-corner,
-.nav {}
-
 .flex-2 {
   display: flex;
   flex-direction: column;
@@ -435,9 +430,16 @@ h1.lustfont {
 }
 
 
-.bannerimg {
+.banner {
   text-align: center;
-  align-content: center;
-  width: 25rem;
-  object-fit: contain
+  overflow: hidden;
+  height: 140px;
+}
+
+.bannerimg {
+  object-fit: cover;
+  max-width: 101%;
+  /*height: auto;
+  display: block;
+  margin: 0 auto; */
 }
