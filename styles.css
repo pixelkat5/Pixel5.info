@@ -427,8 +427,8 @@ h1.lustfont {
   border: 3px solid #000;
   width: auto;
   box-shadow: 4px 4px #000;
+  text-align: center;
 }
-
 
 .banner {
   text-align: center;
@@ -439,7 +439,4 @@ h1.lustfont {
 .bannerimg {
   object-fit: cover;
   max-width: 101%;
-  /*height: auto;
-  display: block;
-  margin: 0 auto; */
 }
