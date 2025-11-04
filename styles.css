@@ -194,6 +194,7 @@ h1.lustfont {
   background-color: #F00;
   box-shadow: 4px 4px #000;
   border-radius: 0;
+  overflow-y: auto;
 }
 
 .welcome2 {
