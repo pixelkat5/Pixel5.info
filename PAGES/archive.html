@@ -8,9 +8,20 @@
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="stylesheet" href="/styles.css">
+    <link href="node_modules/lightbox2/dist/css/lightbox.css" rel="stylesheet" />
   </head>
 <body>
   <a style="position:fixed;z-index:1339; !important;top:55px;right:3px;" href="http://www.snazzyspace.com/generators/viewer-counter/" title="SnazzySpace.com Viewer Counter" target="_blank"><img src="http://www.snazzyspace.com/generators/viewer-counter/counter.php/fid=1761680807/style=0/counter.png" border="0"></a>
+
+  <script>
+      lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true
+        'fadeDuration': 500 //def = 600
+        'imageFadeDuration': 500 //def = 600
+        'resizeDuration': 500 //def = 700
+      })
+  </script>
   
   <div class="main-content">
     <div class="big-container">
@@ -108,15 +119,25 @@
         <div class="top">
           <div class="welcome2">
             <div class="welcome-sign">
+
+              
               <br><hr><br>
               <div class="center"><h2>Archive page</h2></div>
               <h3>This will be where I put my Archive.org page/profile <br>Along with game asset rips I rip.</h3>
+              
               <br><hr><br>
+              <div class="center">
+                <p>Archive.org</p>
+              </div>
               <div class="center">
                 <img class="blur" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY7BLGN2R0Hk7gBKfBvC4rYM3o2AMcqwXbHQ&s" alt="archive.org logo" style="width: 18rem; height: auto;">
               </div>
               <br><hr><br><br>
-              <p>Test sentance to see if it is still in my div.</p>
+
+              <div class="center">
+                <img class=blur" scr="gallery/banners/p5x.png" alt="p5x logo and banner" style="width: 18rem; height: auto;">
+              </div>
+              
 
             </div>
           </div>
@@ -125,6 +146,7 @@
     </div>
   </div>
   <script src="/script.js"></script>
+  <script src="node_modules/lightbox2/dist/js/lightbox-plus-jquery.js"></script>
 </body>
 </html>
 
