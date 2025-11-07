@@ -57,7 +57,7 @@ body {
 .choice {
   background: transparent;
   padding: 10px 55px;
-  border: 2px solid white;
+  border: 2px solid transparent;
   width: 45%;
   position: relative;
   font-size: 1.2rem;
@@ -69,6 +69,7 @@ body {
 .choice.selected {
   background: #ff2b2b;
   color: #fff;
+  border: 2px solid white;
 }
 
 .hidden {
