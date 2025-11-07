@@ -8,21 +8,46 @@
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="stylesheet" href="/styles.css">
-    <link href="node_modules/lightbox2/dist/css/lightbox.css" rel="stylesheet" />
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css"/>
+    <style>
+      .fancybox__container:has(.fancybox__thumbs.is-scrollable) {
+        flex-direction: row;
+      }
+
+      .fancybox__thumbs.is-scrollable {
+        --f-thumbs-cols: 1;
+        --f-thumbs-gap: 4px;
+        --f-thumbs-bg: #ddd;
+
+        --f-thumbs-padding-x: 2px;
+        --f-thumbs-padding-y: 2px;
+        --f-thumbs-viewport-padding-x: 2px;
+        --f-thumbs-viewport-padding-y: 2px;
+
+        --f-thumb-width: 100px;
+        --f-thumb-height: 75px;
+        --f-thumb-bg: rgba(0, 0, 0, 0.1);
+        --f-thumb-focus-shadow: inset 0 0 0 5px rgba(255, 82, 104, 0.5);
+        --f-thumb-selected-shadow: inset 0 0 0 5px rgb(255, 82, 104);
+        --f-thumb-border-radius: 0;
+
+        --f-scrollbar-track-bg: #fff;
+        --f-scrollbar-thumb-bg: #2a2a2a;
+      }
+
+      @media (min-width: 576px) {
+        .fancybox__thumbs.is-scrollable {
+          --f-thumbs-cols: 2;
+        }
+      }
+    </style>
+
+    
   </head>
 <body>
   <a style="position:fixed;z-index:1339; !important;top:55px;right:3px;" href="http://www.snazzyspace.com/generators/viewer-counter/" title="SnazzySpace.com Viewer Counter" target="_blank"><img src="http://www.snazzyspace.com/generators/viewer-counter/counter.php/fid=1761680807/style=0/counter.png" border="0"></a>
-
-  <script>
-      lightbox.option({
-        'resizeDuration': 200,
-        'wrapAround': true
-        'fadeDuration': 500 //def = 600
-        'imageFadeDuration': 500 //def = 600
-        'resizeDuration': 500 //def = 700
-      })
-  </script>
-  
   <div class="main-content">
     <div class="big-container">
       <div class="header" style="">
@@ -132,11 +157,13 @@
               <div class="center">
                 <img class="blur" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY7BLGN2R0Hk7gBKfBvC4rYM3o2AMcqwXbHQ&s" alt="archive.org logo" style="width: 18rem; height: auto;">
               </div>
-              <br><hr><br><br>
+              <br><hr><br>
 
+              <div class="center"><p>P5X</p></div>
               <div class="center">
-                <img class=blur" scr="" alt="p5x logo and banner" style="width: 18rem; height: auto;">
+                <img class="blur" src="https://pixel5.info/gallery/banners/p5x.png" alt="P5X logo banner" style="width: 18rem; height: auto;">
               </div>
+              <br><hr><br>
               
 
             </div>
@@ -146,7 +173,17 @@
     </div>
   </div>
   <script src="/script.js"></script>
-  <script src="node_modules/lightbox2/dist/js/lightbox-plus-jquery.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
+  <script>
+    Fancybox.bind("[data-fancybox]", {
+      Carousel: {
+        Thumbs: {
+          type: "scrollable",
+        },
+      },
+    });
+  </script>
 </body>
 </html>
 
