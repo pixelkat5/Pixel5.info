@@ -496,6 +496,8 @@ hr {
   background-color: #555;
 }
 
+.active,
+
 .content {
   padding: 0 18px;
   display: none;
