@@ -145,23 +145,6 @@ h1.lustfont {
   text-align: center;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .big-container {
   width: 1075px;
   height: auto;
@@ -509,7 +492,6 @@ hr {
   font-size: 15px;
 }
 
-.active,
 .collapsible:hover {
   background-color: #555;
 }
@@ -520,3 +502,5 @@ hr {
   overflow: hidden;
   background-color: #f1f1f1;
 }
+
+p {}
