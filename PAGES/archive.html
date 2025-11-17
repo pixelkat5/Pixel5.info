@@ -49,41 +49,34 @@
 
   <!-- Fetch Balatro image rips.-->
   <script> 
-  $(function(){
-    $("#ba_f_colabs").load("/fetch/balatro/f_colabs.html", function() {
-      // Initialize collapsible after content loads
-      initializeCollapsibles();
-    }); 
-  });
-  $(function(){
-    $("#ba_f_main").load("/fetch/balatro/f_main.html", function() {
-      // Initialize collapsible after content loads
-      initializeCollapsibles();
-    }); 
-  });
-
-  function initializeCollapsibles() {
-    var coll = document.getElementsByClassName("collapsible");
-    for (var i = 0; i < coll.length; i++) {
-      // Remove any existing event listeners by cloning
-      var newColl = coll[i].cloneNode(true);
-      coll[i].parentNode.replaceChild(newColl, coll[i]);
-      
-      newColl.addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-          content.style.display = "none";
-        } else {
-          content.style.display = "block";
-        }
-      });
+  $(document).ready(function(){
+    let loadedCount = 0;
+    const totalLoads = 2;
+    
+    function initializeCollapsibles() {
+      var coll = document.getElementsByClassName("collapsible");
+      for (var i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
     }
-  }
-
-  // Initialize on page load for any static collapsibles
-  $(document).ready(function() {
-    initializeCollapsibles();
+    
+    function checkAndInitialize() {
+      loadedCount++;
+      if (loadedCount === totalLoads) {
+        initializeCollapsibles();
+      }
+    }
+    
+    $("#ba_f_main").load("/fetch/balatro/f_main.html", checkAndInitialize);
+    $("#ba_f_colabs").load("/fetch/balatro/f_colabs.html", checkAndInitialize);
   });
   </script> 
     
@@ -255,22 +248,5 @@
     });
   </script>
 
-  <script>
-    /* Collapsible */
-  var coll = document.getElementsByClassName("collapsible");
-  var i;
-
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    });
-  }
-  </script>
-</body>
+  </body>
 </html>
