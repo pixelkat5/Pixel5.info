@@ -14,6 +14,8 @@
       href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css"
     />
     
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
     <style>
       .fancybox__container:has(.fancybox__thumbs.is-scrollable) {
         flex-direction: row;
@@ -183,428 +185,13 @@
                 <img class="blur" src="/gallery/banners/balatro.png" alt="Balatro banner" style="width: 18rem; height: auto;">
 
                 <button type="button" class="collapsible">Sprites<br>Download: <a href="/gallery/assets/rips/balatro/download/all.zip" download><p style="display: inline;">[ALL] </p></a><a href="/gallery/assets/rips/balatro/download/fonts.zip" download><p style="display: inline;">[FONTS] </p></a><a href="/gallery/assets/rips/balatro/download/shaders.zip" download><p style="display: inline;">[SHADERS] </p></a><a href="/gallery/assets/rips/balatro/download/sounds.zip" download><p style="display: inline;">[SOUNDS] </p></a><a href="/gallery/assets/rips/balatro/download/textures.zip" download><p style="display: inline;">[TEXTURES] </p></a></button>
-                <div class="content"> 
-                  <a href="/gallery/assets/rips/8BitDeck_opt2.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/8BitDeck_opt2.png"
-                      width="500"
-                      height="200"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/8BitDeck.png" data-fancybox="gallery">
-                    <div style="display:none">
-                    <img
-                      src="/gallery/assets/rips/8BitDeck.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro_alt.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/balatro_alt.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/balatro.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/BlindChips.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/BlindChips.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/boosters.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/boosters.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  
-                  <a href="/gallery/assets/rips/chips.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/chips.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/Enhancers.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/Enhancers.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/gamepad_ui.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/gamepad_ui.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/icons.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/icons.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/Jokers.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/Jokers.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/localthunk-logo.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/localthunk-logo.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/playstack-logo.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/playstack-logo.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/ShopSignAnimation.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/ShopSignAnimation.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/stickers.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/stickers.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/tags.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/tags.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/Tarots.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/Tarots.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/ui_assets_opt2.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/ui_assets_opt2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/ui_assets.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/ui_assets.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/Vouchers.png" data-fancybox="gallery">
-                    <img
-                      src="/gallery/assets/rips/Vouchers.png"
-                      loading="lazy"
-                    />
-                  </a>
-              </div>
+                <div class="content" id="balatro-sprites-gallery">
+                  <!-- Content loaded from f_main.html -->
+                </div>
                 <button type="button" class="collapsible">Colabs</button>
-                <div class="content">
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_AC_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_AC_1.png"
-                      width="500"
-                      height="200"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_AC_2.png" data-fancybox="gallery-b">
-                    <div style="display:none">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_AC_2.png"
-                      width="500"
-                      height="200"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_AU_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="gallery/assets/rips/balatro/colabs/collab_AU_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_AU_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_AU_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_BUG_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_BUG_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_BUG_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_BUG_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_C7_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_C7_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_C7_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_C7_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_CL_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_CL_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_CL_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_CL_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_CR_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_BUG_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_CR_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_CR_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_CYP_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_CYP_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_CYP_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_CYP_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_D2_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_D2_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_D2_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_D2_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_DBD_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_DBD_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_DBD_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_DBD_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_DS_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_DS_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_DS_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_DS_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_DTD_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_DTD_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_DTD_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_DTD_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_EG_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_EG_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_EG_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_EG_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_FO_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_FO_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_FO_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_FO_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_PC_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_PC_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_PC_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_PC_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_R_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_R_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_R_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_R_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_SK_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_SK_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_SK_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_SK_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_STP_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_STP_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_STP_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_STP_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_STS_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_STS_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_STS_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_STS_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_SV_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_SV_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_SV_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_SV_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_TBoI_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_TBoI_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_TBoI_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_TBoI_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_TW_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_TW_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_TW_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_TW_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_VS_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_VS_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_VS_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_VS_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_WF_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_WF_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_WF_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_WF_2.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_XR_1.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_XR_1.png"
-                      loading="lazy"
-                    />
-                  </a>
-                  <a href="/gallery/assets/rips/balatro/colabs/collab_XR_2.png" data-fancybox="gallery-b">
-                    <img
-                      src="/gallery/assets/rips/balatro/colabs/collab_XR_2.png"
-                      loading="lazy"
-                    />
-                  </a>
+                <div class="content" id="balatro-colabs-gallery">
+                  <!-- Content loaded from f_colabs.html -->
+                </div>
               <br><hr><br>
             </div>
           </div>
@@ -639,21 +226,27 @@
   </script>
 
   <script>
-    /* Collapsible */
-  var coll = document.getElementsByClassName("collapsible");
-  var i;
-
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
+    $(document).ready(function() {
+      // Load Balatro galleries
+      $('#balatro-sprites-gallery').load('/fetch/balatro/f_main.html');
+      $('#balatro-colabs-gallery').load('/fetch/balatro/f_colabs.html');
     });
-  }
+    
+    /* Collapsible */
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
   </script>
 </body>
 </html>
