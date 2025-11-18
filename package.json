@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "fontsampler-js": "^0.1.4",
     "lightbox2": "^2.11.5"
   }
 }
