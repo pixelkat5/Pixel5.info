@@ -506,7 +506,6 @@ hr {
   background-color: #f1f1f1;
 } */
 
-/* Collapsible styles (fixed) */
 .collapsible {
   background-color: #777;
   color: white;
@@ -523,12 +522,10 @@ hr {
   background-color: #555;
 }
 
-/* Style for active collapsible button only (do NOT hide .active globally) */
 .collapsible.active {
   background-color: #555;
 }
 
-/* Collapsible content (hidden by default) */
 .content {
   padding: 0 18px;
   display: none;
@@ -536,7 +533,6 @@ hr {
   background-color: #f1f1f1;
 }
 
-/* Show the content when the associated button has .active */
 .collapsible.active+.content {
   display: block;
 }
