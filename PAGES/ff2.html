@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>fflate display demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Input for local file loading -->
+    <input type="file" id="zipFileInput" accept=".zip" />
+
+    <!-- Button for URL loading -->
+    <button id="loadUrlButton">Load Images from URL</button>
+
+    <div id="imageGallery"></div>
+
+    <script>
+      const { unzip } = fflate;
+      const gallery = document.getElementById("imageGallery");
+
+      // Function to process unzipped data and display images
+      function processAndDisplayImages(unzipped) {
+        gallery.innerHTML = ""; // Clear previous images
+
+        for (const filename in unzipped) {
+          if (filename.toLowerCase().match(/\.(jpe?g|png|gif|webp)$/)) {
+            const imageData = unzipped[filename];
+
+            // Create a Blob from the image data
+            const blob = new Blob([imageData], {
+              type: `image/${filename.split(".").pop()}`,
+            });
+
+            // Create a Blob URL
+            const imageUrl = URL.createObjectURL(blob);
+
+            // Create and display the image element
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.alt = filename;
+            img.style.maxWidth = "200px";
+            img.style.margin = "10px";
+            gallery.appendChild(img);
+          }
+        }
+      }
+
+      // --- Event Listener for Local File Input ---
+      document
+        .getElementById("zipFileInput")
+        .addEventListener("change", (event) => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const zipData = new Uint8Array(e.target.result);
+
+              // Unzip the file data
+              unzip(zipData, (err, unzipped) => {
+                if (err) {
+                  console.error("Error unzipping file:", err);
+                  return;
+                }
+                processAndDisplayImages(unzipped);
+              });
+            };
+            reader.readAsArrayBuffer(file);
+          }
+        });
+
+      // --- Function and Event Listener for URL Loading ---
+      function loadZipFromUrl() {
+        // Define the URL for your zip file here
+        const zipUrl =
+          "https://09652d59-a58a-459e-9c2c-e8c100153768-00-ywcv7cq2fxs0.riker.replit.dev/gallery/assets/rips/balatro/download/textures.zip"; // REPLACE THIS WITH YOUR URL
+
+        fetch(zipUrl)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.arrayBuffer();
+          })
+          .then((arrayBuffer) => {
+            const zipData = new Uint8Array(arrayBuffer);
+            unzip(zipData, (err, unzipped) => {
+              if (err) {
+                console.error("Error unzipping file from URL:", err);
+                return;
+              }
+              processAndDisplayImages(unzipped);
+            });
+          })
+          .catch((e) => {
+            console.error("Fetch operation error:", e);
+            alert(
+              "Failed to load ZIP file from URL. Check console for details.",
+            );
+          });
+      }
+
+      document
+        .getElementById("loadUrlButton")
+        .addEventListener("click", loadZipFromUrl);
+    </script>
+  </body>
+</html>
