@@ -8,8 +8,203 @@
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .p5-calendar-widget {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+        }
+
+        .p5-calendar-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .p5-calendar-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* dropshadow :3 */
+        .p5-calendar-container {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+        }
+    </style>
   </head>
 <body>
+  <div class="p5-calendar-widget">
+    <div class="p5-calendar-container" id="calendar"></div>
+  </div>
+
+  <script>
+    const config = {
+        version: 2, // Dynamic (inverted in Jan/Feb)
+        showWeather: true,
+        size: 400,
+        assetsPath: 'Assets'
+    };
+
+    // Fetch current date/time values
+    function getDateValues() {
+        const now = new Date();
+        const dayNum = now.getDate();
+        const monthNum = now.getMonth() + 1;
+        const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+        const hour = now.getHours();
+
+        return { dayNum, monthNum, dayName, hour };
+    }
+
+    // Determine version (0=Vanilla, 1=Royal)
+    function getVersion() {
+        const { monthNum } = getDateValues();
+        return monthNum < 3 ? 1 : 0; // Inverted in Jan/Feb
+    }
+
+    // Calc month value for image path
+    function getMonthLeft(dayNum, monthNum) {
+        return dayNum < 10 ? monthNum : monthNum * 100;
+    }
+
+    // Calculate time of day (1-6) (ToD)
+    function getTimeOfDay(hour) {
+        if (hour < 1) return 1;
+        if (hour < 7) return 2;
+        if (hour < 11) return 3;
+        if (hour < 14) return 4;
+        if (hour < 19) return 5;
+        if (hour < 21) return 6;
+        return 1;
+    }
+
+    // Weather icon state (for animation)
+    let weatherFrame = 0;
+    let weatherIcon = '01d'; // default clear day
+
+    // Fetch live weather data from Chicago using Open-Meteo
+    async function fetchWeather() {
+        try {
+            // Chicago coordinates: 41.8781, -87.6298
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=41.8781&longitude=-87.6298&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America/Chicago';
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.current) {
+                // Map Open-Meteo weather codes to OpenWeatherMap icon codes
+                weatherIcon = mapWeatherCode(data.current.weather_code);
+                console.log('Chicago Weather:', weatherIcon, 'Temp:', data.current.temperature_2m + '°F');
+            }
+        } catch (error) {
+            console.error('Weather fetch error:', error);
+        }
+    }
+
+    // Map Open-Meteo weather codes to OpenWeatherMap icon format
+    function mapWeatherCode(code) {
+        const hour = new Date().getHours();
+        const isDay = hour >= 6 && hour < 20;
+
+        // WMO Weather interpretation codes
+        const weatherMap = {
+            0: isDay ? '01d' : '01n',   // Clear sky
+            1: isDay ? '01d' : '01n',   // Mainly clear
+            2: isDay ? '02d' : '02n',   // Partly cloudy
+            3: isDay ? '03d' : '03n',   // Overcast
+            45: '50d',                  // Fog
+            48: '50d',                  // Depositing rime fog
+            51: '09d',                  // Light drizzle
+            53: '09d',                  // Moderate drizzle
+            55: '09d',                  // Dense drizzle
+            61: isDay ? '10d' : '10n',  // Slight rain
+            63: '09d',                  // Moderate rain
+            65: '09d',                  // Heavy rain
+            71: '13d',                  // Slight snow
+            73: '13d',                  // Moderate snow
+            75: '13d',                  // Heavy snow
+            77: '13d',                  // Snow grains
+            80: '09d',                  // Slight rain showers
+            81: '09d',                  // Moderate rain showers
+            82: '09d',                  // Violent rain showers
+            85: '13d',                  // Slight snow showers
+            86: '13d',                  // Heavy snow showers
+            95: '11d',                  // Thunderstorm
+            96: '11d',                  // Thunderstorm with slight hail
+            99: '11d'                   // Thunderstorm with heavy hail
+        };
+
+        return weatherMap[code] || (isDay ? '01d' : '01n');
+    }
+
+    // Update calendar display
+    function updateCalendar() {
+        const { dayNum, monthNum, dayName, hour } = getDateValues();
+        const version = getVersion();
+        const monthLeft = getMonthLeft(dayNum, monthNum);
+        const timeOfDay = getTimeOfDay(hour);
+
+        const calendar = document.getElementById('calendar');
+        calendar.innerHTML = '';
+
+        // Calculate weather icon path index
+        const iconIndex = (weatherFrame % 3) + (dayNum < 10 ? 3 : 0);
+
+        // Layer order (bottom to top)
+        const layers = [
+            // Backgrounds (Bottom layer)
+            `${config.assetsPath}/Day/${version}/${dayNum}Bottom.png`,
+            `${config.assetsPath}/Month/${version}/${monthLeft}Bottom.png`,
+            `${config.assetsPath}/Week/${version}/${dayName}Bottom.png`,
+            `${config.assetsPath}/ToD/${version}/${timeOfDay}.png`,
+
+            // Weather layer
+            `${config.assetsPath}/Weather/icons${iconIndex}/${version}/${weatherIcon}.png`,
+
+            // Foregrounds (Middle layer)
+            `${config.assetsPath}/Day/${version}/${dayNum}.png`,
+            `${config.assetsPath}/Month/${version}/${monthLeft}.png`,
+            `${config.assetsPath}/Week/${version}/${dayName}.png`,
+
+            // Top layer (actual numbers/text)
+            `${config.assetsPath}/Day/${version}/${dayNum}Top.png`,
+            `${config.assetsPath}/Month/${version}/${monthLeft}Top.png`,
+            `${config.assetsPath}/Week/${version}/${dayName}Top.png`
+        ];
+
+        layers.forEach(path => {
+            const layer = document.createElement('div');
+            layer.className = 'p5-calendar-layer';
+            layer.style.backgroundImage = `url('${path}')`;
+            calendar.appendChild(layer);
+        });
+    }
+
+    // Animation loop
+    function animate() {
+        weatherFrame++;
+        updateCalendar();
+    }
+
+    // Initialize
+    fetchWeather();
+    updateCalendar();
+
+    // Update every 5 minutes
+    setInterval(updateCalendar, 300000);
+
+    // Weather animation every 300ms (matching original)
+    setInterval(animate, 300);
+
+    // Fetch weather every hour
+    setInterval(fetchWeather, 3600000);
+  </script>
   <div class="overlay" style="display: none;">
     <div class="dialog-box">
       <p class="dialog-question lustfont"> &lt; &lt; WARNING&gt; &gt; </p>
@@ -139,7 +334,8 @@
               <img src="https://pixel5.info/gallery/assets/index/news_outlined.png" class="snap-rotate rotate" loading="lazy" style="margin-left: -2; margin-left: 0px;">
               <p>This is placeholder text that is just here instead of lorum ipsum <br>Just because it looks kinda ugly. I mean its fine and all it's just normal text would probably look better on the eyes.<br><br><br>Why doesn't "x" thing work/x image or an image looks weird, css is messed up etc.?</p>
               <p class="text-indent: 30px;">Try clearing your browser cache, by default it won't be selected to "all time" so you'll have to manually do that.</p>
-              <a href="chrome://settings/clearBrowserData?search=cache">Shortcut for clearing cache on chrome</a>
+              <a href="chrome://settings/clearBrowserData?search=cache">Shortcut for clearing cache on chrome (chrome://settings/clearBrowserData?search=cache)</a>
+              <a href="about:preferences#privacy">Shortcut for clearing cache on Firefox (about:preferences#privacy)</a>
             </div>
               <div class="flex">
                 <div class="flex-2">
