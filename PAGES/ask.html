@@ -9,6 +9,10 @@
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="stylesheet" href="/styles.css">
+
+    <!-- Chat -->
+    <script src="https://iframe.chat/scripts/main.min.js"></script>
+
   </head>
 <body>
   <a style="position:fixed;z-index:1339; !important;top:55px;right:3px;" href="http://www.snazzyspace.com/generators/viewer-counter/" title="SnazzySpace.com Viewer Counter" target="_blank"><img src="http://www.snazzyspace.com/generators/viewer-counter/counter.php/fid=1761680807/style=0/counter.png" border="0"></a>
@@ -111,6 +115,7 @@
             <div class="welcome-sign">
               <h2>Title</h2>
               <p>subtitle</p>
+              <iframe src="https://iframe.chat/embed?chat=66613358" id="chattable"></iframe>
             </div>
           </div>
         </div>
@@ -118,5 +123,10 @@
     </div>
   </div>
   <script src="/script.js"></script>
+  <script>
+    chattable.initialize({
+      stylesheet: "chattable.css",
+    });
+  </script>
 </body>
 </html>
