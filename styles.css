@@ -6,6 +6,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'optimanova';
+  src: url('/fonts/Optima nova LT Black Italic.otf') format('otf'),
+    url('/fonts/Optima nova LT Black Italic.otf') format('otf');
+  font-weight: bold;
+  font-style: bold;
+}
+
 body {
   margin: 0;
   padding: 0;

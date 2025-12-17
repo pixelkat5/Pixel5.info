@@ -13,6 +13,8 @@
     <!-- Chat -->
     <script src="https://iframe.chat/scripts/main.min.js"></script>
 
+
+
   </head>
 <body>
   <a style="position:fixed;z-index:1339; !important;top:55px;right:3px;" href="http://www.snazzyspace.com/generators/viewer-counter/" title="SnazzySpace.com Viewer Counter" target="_blank"><img src="http://www.snazzyspace.com/generators/viewer-counter/counter.php/fid=1761680807/style=0/counter.png" border="0"></a>
@@ -113,10 +115,14 @@
         <div class="top">
           <div class="welcome2">
             <div class="welcome-sign">
-              <iframe src="https://iframe.chat/embed?chat=66613358" id="chattable"></iframe>
-              <iframe src="https://iframe.chat/embed/?chat=66613358"></iframe>
-
-              <p>I dont know why but it doesn't seem to work. Or at least on my end. My host might just need to propergate the dns or whatever.</p>
+              
+              <iframe src="https://iframe.chat/embed?chat=66613358" id="chattable" width="400" height="500"></iframe>
+              <script>
+                chattable.initialize({
+                  stylesheet: "/chattable.css",
+                });
+              </script>
+              
             </div>
           </div>
         </div>
@@ -124,10 +130,5 @@
     </div>
   </div>
   <script src="/script.js"></script>
-  <script>
-    chattable.initialize({
-      stylesheet: "chattable.css",
-    });
-  </script>
 </body>
 </html>
