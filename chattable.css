@@ -308,3 +308,7 @@ blockquote {
 .msgWrapper:has(.allMessages[uid="7hpafr0PK8UBZG9tQo2QyFIpzfS2"]):before {
   background-image: url(Jonkler.png);
 }
+
+.msgWrapper:has(.allMessages[uid="kaW7woNk6lXjj2e8LxWDywo4LAG2"]):before {
+  background-image: url();
+}
