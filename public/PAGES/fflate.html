@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>fflate display demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.min.js"></script>
+  </head>
+
+  <body>
+    <input type="file" id="zipFileInput" accept=".zip" />
+    <div id="imageGallery"></div>
+
+    <script>
+      const { unzip } = fflate;
+
+      document
+        .getElementById("zipFileInput")
+        .addEventListener("change", (event) => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const zipData = new Uint8Array(e.target.result);
+
+              // Unzip the file data
+              unzip(zipData, (err, unzipped) => {
+                if (err) {
+                  console.error("Error unzipping file:", err);
+                  return;
+                }
+
+                const gallery = document.getElementById("imageGallery");
+                gallery.innerHTML = ""; // Clear previous images
+
+                for (const filename in unzipped) {
+                  if (filename.toLowerCase().match(/\.(jpe?g|png|gif|webp)$/)) {
+                    const imageData = unzipped[filename];
+
+                    // Create a Blob from the image data
+                    const blob = new Blob([imageData], {
+                      type: `image/${filename.split(".").pop()}`,
+                    });
+
+                    // Create a Blob URL
+                    const imageUrl = URL.createObjectURL(blob);
+
+                    // Create and display the image element
+                    const img = document.createElement("img");
+                    img.src = imageUrl;
+                    img.alt = filename;
+                    img.style.maxWidth = "200px";
+                    img.style.margin = "10px";
+                    gallery.appendChild(img);
+                  }
+                }
+              });
+            };
+            reader.readAsArrayBuffer(file);
+          }
+        });
+    </script>
+  </body>
+</html>

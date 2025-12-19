@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css"
+    />
+    <style>
+      .fancybox__container:has(.fancybox__thumbs.is-scrollable) {
+        flex-direction: row;
+      }
+
+      .fancybox__thumbs.is-scrollable {
+        --f-thumbs-cols: 1;
+        --f-thumbs-gap: 4px;
+        --f-thumbs-bg: #ddd;
+
+        --f-thumbs-padding-x: 2px;
+        --f-thumbs-padding-y: 2px;
+        --f-thumbs-viewport-padding-x: 2px;
+        --f-thumbs-viewport-padding-y: 2px;
+
+        --f-thumb-width: 100px;
+        --f-thumb-height: 75px;
+        --f-thumb-bg: rgba(0, 0, 0, 0.1);
+        --f-thumb-focus-shadow: inset 0 0 0 5px rgba(255, 82, 104, 0.5);
+        --f-thumb-selected-shadow: inset 0 0 0 5px rgb(255, 82, 104);
+        --f-thumb-border-radius: 0;
+
+        --f-scrollbar-track-bg: #fff;
+        --f-scrollbar-thumb-bg: #2a2a2a;
+      }
+
+      @media (min-width: 576px) {
+        .fancybox__thumbs.is-scrollable {
+          --f-thumbs-cols: 2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <a href="https://lipsum.app/id/60/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/60/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #1"
+        />
+      </a>
+      <a href="https://lipsum.app/id/61/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/61/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #2"
+        />
+      </a>
+      <a href="https://lipsum.app/id/62/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/62/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #3"
+        />
+      </a>
+      <a href="https://lipsum.app/id/63/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/63/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #4"
+        />
+      </a>
+      <a href="https://lipsum.app/id/64/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/64/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #5"
+        />
+      </a>
+      <a href="https://lipsum.app/id/65/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/65/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #6"
+        />
+      </a>
+      <a href="https://lipsum.app/id/66/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/66/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #7"
+        />
+      </a>
+      <a href="https://lipsum.app/id/67/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/67/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #8"
+        />
+      </a>
+      <a href="https://lipsum.app/id/68/1600x1200" data-fancybox="gallery">
+        <img
+          src="https://lipsum.app/id/68/200x150"
+          width="200"
+          height="150"
+          alt="Sample image #9"
+        />
+      </a>
+    </p>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+      Fancybox.bind("[data-fancybox]", {
+        Carousel: {
+          Thumbs: {
+            type: "scrollable",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

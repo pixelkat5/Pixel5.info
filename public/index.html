@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Homepage -</title>
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999999;
+            display: block;
+            pointer-events: none;
+        }
+
+        #canvas.hidden {
+            display: none;
+            pointer-events: none;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        body > *:not(#canvas) {
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.3s ease-in;
+        }
+
+        .p5-calendar-widget {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 99999;
+        }
+
+        .p5-calendar-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            z-index: 99999;
+        }
+
+        .p5-calendar-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 99999;
+        }
+
+        /* dropshadow :3 */
+        .p5-calendar-container {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+        }
+    </style>
+  </head>
+<body>
+
+  
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let currentFrame = 0;
+    const totalFrames = 14;
+    const frameDelay = 70;
+
+    const frames = [];
+    let imagesLoaded = 0;
+    const frameImages = [
+      '/gallery/assets/intro/1.png',
+      '/gallery/assets/intro/2.png',
+      '/gallery/assets/intro/3.png',
+      '/gallery/assets/intro/4.png',
+      '/gallery/assets/intro/5.png',
+      '/gallery/assets/intro/6.png',
+      '/gallery/assets/intro/7.png',
+      '/gallery/assets/intro/8.png',
+      '/gallery/assets/intro/9.png',
+      '/gallery/assets/intro/10.png',
+      '/gallery/assets/intro/11.png',
+      '/gallery/assets/intro/12.png',
+      '/gallery/assets/intro/13.png',
+      '/gallery/assets/intro/14.png'
+    ];
+
+    function preloadFrames() {
+      frameImages.forEach((src, index) => {
+        const img = new Image();
+        img.onload = () => {
+          frames[index] = img;
+          imagesLoaded++;
+          if (imagesLoaded === totalFrames) {
+            startAnimation();
+          }
+        };
+        img.onerror = () => {
+          imagesLoaded++;
+          frames[index] = null;
+          if (imagesLoaded === totalFrames) {
+            startAnimation();
+          }
+        };
+        img.src = src;
+      });
+    }
+
+    function drawFrame(frameNum) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (frames[frameNum]) {
+        const scale = Math.max(canvas.width / frames[frameNum].width, canvas.height / frames[frameNum].height);
+        const x = (canvas.width / 2) - (frames[frameNum].width / 2) * scale;
+        const y = (canvas.height / 2) - (frames[frameNum].height / 2) * scale;
+        ctx.drawImage(frames[frameNum], x, y, frames[frameNum].width * scale, frames[frameNum].height * scale);
+      }
+    }
+
+    function nextFrame() {
+      if (currentFrame < totalFrames - 1) {
+        currentFrame++;
+        drawFrame(currentFrame);
+        setTimeout(nextFrame, frameDelay);
+      } else {
+        drawFrame(currentFrame);
+        canvas.classList.add('hidden');
+      }
+    }
+
+    function startAnimation() {
+      drawFrame(0);
+      setTimeout(nextFrame, 500);
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      drawFrame(currentFrame);
+    });
+
+    preloadFrames();
+  </script>
+  
+  
+  <div class="p5-calendar-widget">
+    <div class="p5-calendar-container" id="calendar"></div>
+  </div>
+
+  <script>
+    const config = {
+        version: 2, // Dynamic (inverted in Jan/Feb)
+        showWeather: true,
+        size: 400,
+        assetsPath: 'Assets'
+    };
+
+    // Fetch current date/time values
+    function getDateValues() {
+        const now = new Date();
+        const dayNum = now.getDate();
+        const monthNum = now.getMonth() + 1;
+        const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+        const hour = now.getHours();
+
+        return { dayNum, monthNum, dayName, hour };
+    }
+
+    // Determine version (0=Vanilla, 1=Royal)
+    function getVersion() {
+        const { monthNum } = getDateValues();
+        return monthNum < 3 ? 1 : 0; // Inverted in Jan/Feb
+    }
+
+    // Calc month value for image path
+    function getMonthLeft(dayNum, monthNum) {
+        return dayNum < 10 ? monthNum : monthNum * 100;
+    }
+
+    // Calculate time of day (1-6) (ToD)
+    function getTimeOfDay(hour) {
+        if (hour < 1) return 1;
+        if (hour < 7) return 2;
+        if (hour < 11) return 3;
+        if (hour < 14) return 4;
+        if (hour < 19) return 5;
+        if (hour < 21) return 6;
+        return 1;
+    }
+
+    // Weather icon state (for animation)
+    let weatherFrame = 0;
+    let weatherIcon = '01d'; // default clear day
+
+    // Fetch live weather data from Chicago using Open-Meteo
+    async function fetchWeather() {
+        try {
+            // Chicago coordinates: 41.8781, -87.6298
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=41.8781&longitude=-87.6298&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America/Chicago';
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.current) {
+                // Map Open-Meteo weather codes to OpenWeatherMap icon codes
+                weatherIcon = mapWeatherCode(data.current.weather_code);
+                console.log('Chicago Weather:', weatherIcon, 'Temp:', data.current.temperature_2m + '°F');
+            }
+        } catch (error) {
+            console.error('Weather fetch error:', error);
+        }
+    }
+
+    // Map Open-Meteo weather codes to OpenWeatherMap icon format
+    function mapWeatherCode(code) {
+        const hour = new Date().getHours();
+        const isDay = hour >= 6 && hour < 20;
+
+        // WMO Weather interpretation codes
+        const weatherMap = {
+            0: isDay ? '01d' : '01n',   // Clear sky
+            1: isDay ? '01d' : '01n',   // Mainly clear
+            2: isDay ? '02d' : '02n',   // Partly cloudy
+            3: isDay ? '03d' : '03n',   // Overcast
+            45: '50d',                  // Fog
+            48: '50d',                  // Depositing rime fog
+            51: '09d',                  // Light drizzle
+            53: '09d',                  // Moderate drizzle
+            55: '09d',                  // Dense drizzle
+            61: isDay ? '10d' : '10n',  // Slight rain
+            63: '09d',                  // Moderate rain
+            65: '09d',                  // Heavy rain
+            71: '13d',                  // Slight snow
+            73: '13d',                  // Moderate snow
+            75: '13d',                  // Heavy snow
+            77: '13d',                  // Snow grains
+            80: '09d',                  // Slight rain showers
+            81: '09d',                  // Moderate rain showers
+            82: '09d',                  // Violent rain showers
+            85: '13d',                  // Slight snow showers
+            86: '13d',                  // Heavy snow showers
+            95: '11d',                  // Thunderstorm
+            96: '11d',                  // Thunderstorm with slight hail
+            99: '11d'                   // Thunderstorm with heavy hail
+        };
+
+        return weatherMap[code] || (isDay ? '01d' : '01n');
+    }
+
+    // Update calendar display
+    function updateCalendar() {
+        const { dayNum, monthNum, dayName, hour } = getDateValues();
+        const version = getVersion();
+        const monthLeft = getMonthLeft(dayNum, monthNum);
+        const timeOfDay = getTimeOfDay(hour);
+
+        const calendar = document.getElementById('calendar');
+        calendar.innerHTML = '';
+
+        // Calculate weather icon path index
+        const iconIndex = (weatherFrame % 3) + (dayNum < 10 ? 3 : 0);
+
+        // Layer order (bottom to top)
+        const layers = [
+            // Backgrounds (Bottom layer)
+            `${config.assetsPath}/Day/${version}/${dayNum}Bottom.png`,
+            `${config.assetsPath}/Month/${version}/${monthLeft}Bottom.png`,
+            `${config.assetsPath}/Week/${version}/${dayName}Bottom.png`,
+            `${config.assetsPath}/ToD/${version}/${timeOfDay}.png`,
+
+            // Weather layer
+            `${config.assetsPath}/Weather/icons${iconIndex}/${version}/${weatherIcon}.png`,
+
+            // Foregrounds (Middle layer)
+            `${config.assetsPath}/Day/${version}/${dayNum}.png`,
+            `${config.assetsPath}/Month/${version}/${monthLeft}.png`,
+            `${config.assetsPath}/Week/${version}/${dayName}.png`,
+
+            // Top layer (actual numbers/text)
+            `${config.assetsPath}/Day/${version}/${dayNum}Top.png`,
+            `${config.assetsPath}/Month/${version}/${monthLeft}Top.png`,
+            `${config.assetsPath}/Week/${version}/${dayName}Top.png`
+        ];
+
+        layers.forEach(path => {
+            const layer = document.createElement('div');
+            layer.className = 'p5-calendar-layer';
+            layer.style.backgroundImage = `url('${path}')`;
+            calendar.appendChild(layer);
+        });
+    }
+
+    // Animation loop
+    function animate() {
+        weatherFrame++;
+        updateCalendar();
+    }
+
+    // Initialize
+    fetchWeather();
+    updateCalendar();
+
+    // Update every 5 minutes
+    setInterval(updateCalendar, 300000);
+
+    // Weather animation every 300ms (matching original)
+    setInterval(animate, 300);
+
+    // Fetch weather every hour
+    setInterval(fetchWeather, 3600000);
+  </script>
+  <div class="overlay" style="display: none;">
+    <div class="dialog-box">
+      <p class="dialog-question lustfont"> &lt; &lt; WARNING&gt; &gt; </p>
+      <p class="lustfont" style="margin-bottom: 20px;margin-top: 0px;">The following page contains topics like . . .</p>
+      <textarea readonly="">Place holder TW.</textarea>
+      <div class="choice-container">
+        <div class="choice selected" data-choice="Yes">
+          <div class="arrow">▶</div>
+          <img src="gallery/old-asset/OK-tb.png" alt="OK" style="width: 60%; transform: rotate(4deg);margin-top: 5px;">
+        </div>
+        <div class="choice" data-choice="No">
+          <div class="arrow hidden">▶</div>
+          <img src="gallery/old-asset/no-tb.png" alt="NO" style="width:60%; margin-bottom: 0px;margin-top: 5px;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="big-container">
+      <div class="header" style="">   
+        
+        <div class="banner">
+        <img class="bannerimg" src="/LetUsStartTheGame.png" alt="Let Us Start The Game" id="banner" loading="eager">
+          
+      </div>
+      </div>
+      <div class="flex">
+        <div class="mainSidebar">
+          <div class="main-nav">
+            <div class="nav">
+              <div class="navbar">
+                <a class="link-wrapper" href="/">
+                  <span class="fallback">Index</span>
+                  <div class="img-wrapper">
+                    <img class="normal" src="/gallery/assets/index.png"">
+                    <img class="active" src="/gallery/assets/index_active.png">
+                  </div>
+                  <div class="shape-wrapper">
+                    <div class="shape red-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#FF0000" points="29.5,8.5 150.7,0 108.1,32.7 3.1,47 "/></svg></div>
+                    <div class="shape cyan-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#00FFFF" points="0.3,17 125.1,0 68.8,45.6 24.3,39 "/></svg></div>
+                  </div>
+                </a>
+                <a class="link-wrapper" href="/PAGES/ask.html">
+                  <span class="fallback">Ask</span>
+                  <div class="img-wrapper">
+                    <img class="normal" src="/gallery/assets/ask.png">
+                    <img class="active" src="/gallery/assets/ask_active.png">
+                  </div>
+                  <div class="shape-wrapper">
+                    <div class="shape red-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#FF0000" points="0,7.1 127.3,0 32.3,64 4.8,58.2"></svg></div>
+                    <div class="shape cyan-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#00FFFF" points="14,0.5 127.4,0 77.4,164 2.3,61.1 "/></svg></div>
+                  </div>
+                </a>
+                <a class="link-wrapper" href="/PAGES/archive.html">
+                  <span class="fallback">Archive</span>
+                  <div class="img-wrapper">
+                    <img class="normal" src="/gallery/assets/archive.png">
+                    <img class="active" src="/gallery/assets/archive_active.png">
+                  </div>
+                  <div class="shape-wrapper">
+                    <div class="shape red-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#FF0000" points="15.5,0 70.7,0 118.1,32.7 43.1,47 "/></svg></div>
+                    <div class="shape cyan-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#00FFFF" points="17.3,0 105.1,0 68.8,45.6 24.3,39 "/></svg></div>
+                  </div>
+                </a>
+                <a class="link-wrapper" href="/PAGES/about.html">
+                  <span class="fallback">About</span>
+                  <div class="img-wrapper">
+                    <img class="normal" src="/gallery/assets/about.png">
+                    <img class="active" src="/gallery/assets/about_active.png">
+                  </div>
+                  <div class="shape-wrapper">
+                    <div class="shape red-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#FF0000" points="19.5,0,110.7,0,80.1,32.7,3.1,47 "/></svg></div>
+                    <div class="shape cyan-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#00FFFF" points="11,3,85.1,0 118.8,45.6,14.3,29 "/></svg></div>
+                  </div>
+                </a>
+                <a class="link-wrapper" href="/PAGES/blog.html">
+                  <span class="fallback">Blog</span>
+                  <div class="img-wrapper">
+                    <img class="normal" src="/gallery/assets/blog.png"">
+                    <img class="active" src="/gallery/assets/blog_active.png">
+                  </div>
+                  <div class="shape-wrapper">
+                    <div class="shape red-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#FF0000" points="0,7.1 127.3,0 32.3,64 4.8,58.2"></svg></div>
+                    <div class="shape cyan-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#00FFFF" points="14,0.5 127.4,0 77.4,164 2.3,61.1 "/></svg></div>
+                  </div>
+                </a>
+                <a class="link-wrapper" href="/PAGES/tags.html">
+                  <span class="fallback">Tags</span>
+                  <div class="img-wrapper">
+                    <img class="normal" src="/gallery/assets/tags.png"">
+                    <img class="active" src="/gallery/assets/tags_active.png">
+                  </div>
+                  <div class="shape-wrapper">
+                    <div class="shape red-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#FF0000" points="0,7.1 127.3,0 32.3,64 4.8,58.2"></svg></div>
+                    <div class="shape cyan-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#00FFFF" points="14,0.5 127.4,0 77.4,164 2.3,61.1 "/></svg></div>
+                  </div>
+                </a>
+                <a class="link-wrapper" href="/PAGES/credits.html">
+                  <span class="fallback">Credits</span>
+                  <div class="img-wrapper">
+                    <img class="normal" src="/gallery/assets/credits.png">
+                    <img class="active" src="/gallery/assets/credits_active.png">
+                  </div>
+                  <div class="shape-wrapper">
+                    <div class="shape red-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#FF0000" points="15.5,0 70.7,0 118.1,32.7 43.1,47 "/></svg></div>
+                    <div class="shape cyan-fill jelly"><svg x="0px" y="0px" viewBox="0 0 108.1 47" enable-background="new 0 0 108.1 47"><polygon fill="#00FFFF" points="17.3,0 105.1,0 68.8,45.6 24.3,39 "/></svg></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="top">
+          <div id="counter">
+            <a href="https://info.flagcounter.com/RAwT"><img src="https://s05.flagcounter.com/count2/RAwT/bg_FFBAB0/txt_000000/border_575757/columns_4/maxflags_16/viewers_Viewers+from+different+countries/labels_1/pageviews_1/flags_0/percent_0/" alt="counter failed to load" border="0"></a>
+            <a style="position:fixed;z-index:1339; !important;top:55px;right:3px;" href="http://www.snazzyspace.com/generators/viewer-counter/" title="SnazzySpace.com Viewer Counter" target="_blank"><img src="http://www.snazzyspace.com/generators/viewer-counter/counter.php/fid=1761680807/style=0/counter.png" border="0"></a>
+            <a href="https://tamanotchi.world/28305c"><img src="https://tamanotchi.world/i2/28305" alt="It's my tamaNOTchi! Click to feed!"></a>
+            <!-- FC2 Counter  Starts here -->
+            <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=40662034&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=40662034&main=1" /></noscript>
+            <!-- FC2 Counter  Ends here -->
+          </div>
+          <br>
+          <div class="welcome2">
+            <div class="welcome-sign" style="padding-top: 0px;">
+              <div class="flex">
+                <div class="flex2">
+                  <center></center>
+                </div>
+              </div>
+              <br>
+              
+              <img src="https://pixel5.info/gallery/assets/index/news_outlined.png" class="snap-rotate rotate" loading="lazy" style="margin-left: -2; margin-left: 0px;">
+              <p>Hey! I'm Pixel and I guess this is my website. Dunno what to really put.</p>
+
+              <form method="post" action="https://poll.pollcode.com/14195885"><div style="background-color:#EEEEEE;padding:2px;width:175px;font-family:Arial;font-size:small;color:#000000;"><div style="padding:2px 0px 4px 2px;"><strong>What Arcana would you be ?</strong></div><div align="center" style="padding-bottom:5px;"><select name="answer"><option value="1">[ 0 ] - Fool</option><option value="2">[ I ] - Magician</option><option value="3">[ II ] - Priestess</option><option value="4">[ III ] - Empress</option><option value="5">[ IV ] - Emperor</option><option value="6">[ V ] - Hierophant</option><option value="7">[ VI ] - Lovers</option><option value="8">[ VII ] - Chariot</option><option value="9">[ VIII ] - Justice</option><option value="10">[ IX ] - Hermit</option><option value="11">[ X ] - Fortune</option><option value="12">[ XI ] - Strength</option><option value="13">[ XII ] - Hanged Man</option><option value="14">[ XII ] - Death</option><option value="15">[ XIV ] - Temperance</option><option value="16">[ XV ] - Devil</option><option value="17">[ XVI ] - Tower</option><option value="18">[ XVII ] - Star</option><option value="19">[ XVIII ] - Moon</option><option value="20">[ XIX ] - Sun</option><option value="21">[ XX ] - Judgement</option><option value="22">[ XX(2) ] - Aeon</option><option value="23">[ XXI ] - World</option><option value="24">[ XXII ] - (False) Faith</option><option value="25">[ XXII ] - (True) Faith</option></select></div><div align="center" style="padding:3px;"><input type="submit" value=" Vote "> <input type="submit" name="view" value=" View "></div><div align="right" style="font-size:10px;"></div></div></form>
+              
+              <p>To be added:<br> Gifypet<br>Status Cafe<br>web neko</p>
+              <a href="https://layouts.spacehey.com/layout?id=85996#/">Oh also this DSi thingy</a><br>
+              <a href="https://counter.fc2.com/en/index.html">A better counter</a><br>
+              <a href="https://www.timeanddate.com/clocks/free.html">Maybe a clock to display my time</a><br>
+              <s><a href="https://tamanotchi.world/28305c">And finally my Tamanotchi which doesn't seem to work. . .</a></s>
+              
+            </div>
+              <div class="flex">
+                <div class="flex-2">
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.snap-rotate');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('rotate');
+        } else {
+          // entry.target.classList.remove('rotate');
+        }
+      });
+    }, {
+      threshold: 0.75
+    });
+
+    images.forEach(image => {
+      observer.observe(image);
+    });
+  });
+  </script>
+</body>
+</html>
