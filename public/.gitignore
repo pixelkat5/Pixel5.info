@@ -1,3 +1,10 @@
+/*
+
+!/public
+
+/public/*
+!/public/*
+
 # Python
 __pycache__/
 *.py[cod]
@@ -36,7 +43,3 @@ Thumbs.db
 # Replit
 .replit
 .upm/
-
-# Other
-.deploy.py
-.server.py
